@@ -1,7 +1,8 @@
 <template>
     <div id="main">
-        <Header title="喵喵电影" />
+        <Header title="喵眼电影" />
             <div id="content">
+                <swiper class="swiper"></swiper>
                 <div class="movie_menu">
                     <router-link tag="div" to="/movie/city" class="city_name">
                         <span>{{ $store.state.city.nm }}</span><i class="iconfont icon-lower-triangle"></i>
@@ -28,38 +29,17 @@
 
 import Header from '@/components/Header';
 import TabBar from '@/components/TabBar';
+import swiper from '@/components/swiper'
 import { messageBox } from '@/components/JS';
 
 export default {
     name : 'Movie',
     components : {
         Header,
-        TabBar
+        TabBar,
+        swiper
     },
     mounted(){
-
-        setTimeout(()=>{
-            this.axios.get('/api/getLocation').then((res)=>{
-                var msg = res.data.msg;
-                if(msg === 'ok'){
-
-                    var nm = res.data.data.nm;
-                    var id = res.data.data.id;
-                    if( this.$store.state.city.id == id ){return;}
-                    messageBox({
-                        title : '定位',
-                        content : nm,
-                        cancel : '取消',
-                        ok : '切换定位',
-                        handleOk(){
-                            window.localStorage.setItem('nowNm',nm);
-                            window.localStorage.setItem('nowId',id);
-                            window.location.reload();
-                        }
-                    });
-                }
-            });
-        },3000);
        
     }
 }
@@ -78,7 +58,7 @@ export default {
 .movie_menu .search_entry.active{ color: #ef4238; border-bottom: 2px #ef4238 solid;}
 .movie_menu .search_entry.router-link-active{ color: #ef4238; border-bottom: 2px #ef4238 solid;}
 .movie_menu .search_entry i{  font-size:24px; color:red;}
-
+.swiper{width: 100%}
 .slide-enter-active{ animation : 13s detailMove;}
 @keyframes detailMove{
 	0%{

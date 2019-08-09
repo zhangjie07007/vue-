@@ -5,6 +5,7 @@ import store from './stores'
 
 import axios from 'axios'
 Vue.prototype.axios = axios;
+import 'lib-flexible'
 
 Vue.filter('setWH',(url , arg)=>{
     return url.replace(/w\.h/,arg);
@@ -15,6 +16,11 @@ Vue.component('Scroller' , Scroller);
 
 import Loading from '@/components/Loading'
 Vue.component('Loading',Loading);
+
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
+Vue.use(ElementUI);
+
 
 Vue.config.productionTip = false
 

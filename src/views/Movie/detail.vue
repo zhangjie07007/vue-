@@ -4,7 +4,7 @@
             <i class="iconfont icon-right" @touchstart="handleToBack"></i>
         </Header>
         <Loading v-if="isLoading" />
-		<div v-else id="content" class="contentDetail">
+		<!-- <div v-else id="content" class="contentDetail"> -->
 			<!-- <div class="detail_list">
 				<div class="detail_list_bg"></div>
 				<div class="detail_list_filter"></div>
@@ -36,7 +36,8 @@
 					</li>
 				</ul>
 			</div> -->
-            <div class="detail_list">
+			<h1>{{movieId}} -- {{id}}</h1>
+            <!-- <div class="detail_list">
 				<div class="detail_list_bg" :style="{ 'background-image' : 'url('+ detailMovie.img.replace(/w\.h/,'148.208') +')' }"></div>
 				<div class="detail_list_filter"></div>
 				<div class="detail_list_content">
@@ -67,50 +68,68 @@
 					</li>
 				</ul>
 			</div>
-		</div>
+		</div> -->
 	</div>
 </template>
 
 <script>
 
 import Header from '@/components/Header';
+import { getdail } from '../../api'
 
 export default {
-    name : 'Detail',
-    data(){
-        return {
-            detailMovie : {},
-            isLoading : true
-        }
-    },
-    components : {
-        Header
-    },
-    props : ['movieId'],
-    methods : {
-        handleToBack(){
-            this.$router.back();
-        }
-    },
-    mounted(){
-        //console.log( this.movieId );
-        this.axios.get('/api/detailmovie?movieId='+ this.movieId).then((res)=>{
-            var msg = res.data.msg;
-            if( msg === 'ok' ){
-                this.isLoading = false;
-                this.detailMovie = res.data.data.detailMovie;
-                this.$nextTick(()=>{
-                    new Swiper(this.$refs.detail_player , {
-                        slidesPerView : 'auto',
-                        freeMode : true,
-                        freeModeSticky: true
-                    });
-                });
-            }
-        });
-    }
+	name : 'Detail',
+	data(){
+		return {
+			isLoading:true
+		}
+	},
+	props:['movieId','id'],
+	components:{
+		Header,
+	},
+	methods:{
+		handleToBack(){
+			console.log(this.$route.path.substr(7,5))
+		if(this.$route.path.substr(7,5) == 'dail/'){
+			this.$router.push('/movie')
+		}else if(this.$route.path.substr(7,5) == 'dail1'){
+			this.$router.push('/movie/ComingSoon')
+		}
+		},
+		getdaildata(url){ 
+			getdail(`/api/detailmovie?movieId=${url}`).then(res=>{
+				console.log(res)
+				this.isLoading = false;
+			})
+		}
+	},
+	mounted(){
+		this.getdaildata(this.movieId);
+	}
+    
 }
 </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 <style scoped>
 #detailContrainer{ position: absolute; left:0; top:0; z-index: 100; width:100%; min-height:100%; background:white;}
