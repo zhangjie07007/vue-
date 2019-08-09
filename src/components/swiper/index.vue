@@ -4,6 +4,7 @@
       <div class="swiper-slide" v-for="(item) in datalist" :key="item.bannerId">
         <img class="swiperimg" :src="item.imgUrl" alt />
       </div>
+      <div class="swiper-pagination"></div>
     </div>
   </div>
 </template>
@@ -22,7 +23,7 @@ export default {
       method: "get",
       headers: {
         "X-Client-Info":
-        '{"a":"3000","ch":"1002","v":"5.0.4","e":"1563888146987842478543"}',
+          '{"a":"3000","ch":"1002","v":"5.0.4","e":"1563888146987842478543"}',
         "X-Host": "mall.cfg.common-banner"
       }
     }).then(res => {
@@ -36,7 +37,12 @@ export default {
             stopOnLastSlide: true,
             disableOnInteraction: true
           },
-          effect: "fade"
+          pagination: {
+            el: ".swiper-pagination",
+            dynamicBullets: true
+            // dynamicMainBullets: 2
+          }
+          // effect: "fade"
         });
       });
     });

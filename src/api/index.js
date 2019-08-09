@@ -24,10 +24,17 @@ let search = (kw) =>axios({
     url:`/api/searchList?cityId=10&kw=${kw}`,
     methods:'get'
 })
+
+
+let getcinemas = () =>axios({
+    url:'/api/cinemaList?cityId=10',
+    method:'get'
+})
 export {
     getcitylist,
     getplaying,
     getdail,
     getcomesoon,
-    search
+    search,
+    getcinemas
 }

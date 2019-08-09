@@ -8,6 +8,7 @@
 import BScroll from 'better-scroll';
 export default {
     name : 'Scroller',
+    
     props : {
         handleToScroll : {
             type : Function,

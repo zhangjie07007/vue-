@@ -57,7 +57,7 @@ export default {
       this.isLoading = false
     } else {
       getcitylist().then(res => {
-        //   console.table(res.data.data.cities);
+          console.table(res.data.data.cities);
         let { citylist, hotcity } = this.getlist(res.data.data.cities);
         this.citylist = citylist;
         this.hotcity = hotcity;
