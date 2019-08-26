@@ -15,7 +15,7 @@
           <span>{{item.distance}}</span>
         </div>
         <div class="card">
-          <div v-for = "card in item.tag.hallType">{{card}}</div>
+          <div v-for = "card in item.tag.hallType" :key = 'card'>{{card}}</div>
         </div>
       </li>
     </ul>

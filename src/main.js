@@ -7,10 +7,6 @@ import axios from 'axios'
 Vue.prototype.axios = axios;
 import 'lib-flexible'
 
-Vue.filter('setWH',(url , arg)=>{
-    return url.replace(/w\.h/,arg);
-});
-
 import Scroller from '@/components/Scroller'
 Vue.component('Scroller' , Scroller);
 
